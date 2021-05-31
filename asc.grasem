@@ -7,7 +7,7 @@ include(`asc.ohm')
     LeafBody [lb inputs outputs object initially handler rb] =
       [[ { ${inputs} ${outputs} ${objects} ${initially} ${handler} }\n]]
 
-    CompositeBody [lb inputs outputs contains connectios rb] =
+    CompositeBody [lb inputs outputs contains connections rb] =
       [[ { ${inputs} ${outputs} ${contains} ${connections} }\n]]
     
       Contains [k lb @other rb] = [[contains { ${other} }]]
