@@ -9,10 +9,15 @@ catch () {
 
 set -x
 
-target=layer0
+target1=layer0
+target2=container1
+target3=hello
 
 ./buildgrammar.bash
 m4 asc.grasem >_.grasem
 ../grasem/run.bash _.grasem >_.js
 cat _.js foreign.js >_asc.js
-node _asc.js <${target}.asc
+
+node _asc.js <${target1}.asc
+node _asc.js <${target2}.asc
+node _asc.js <${target3}.asc

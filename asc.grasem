@@ -4,20 +4,20 @@ include(`asc.ohm')
   Composite [konstant ident body] = [[composite ${ident} ${body}]]
   Leaf [k ident body] = [[leaf ${ident} ${body}]]
 
-    LeafBody [lb inputs outputs object initially handler rb] =
-      [[ { ${inputs} ${outputs} ${objects} ${initially} ${handler} }\n]]
+    LeafBody [lb inputs outputs objects initially handler rb] =
+      [[{\n${inputs}\n${outputs}\n${objects}\n${initially}\n${handler}\n}\n]]
 
     CompositeBody [lb inputs outputs contains connections rb] =
-      [[ { ${inputs} ${outputs} ${contains} ${connections} }\n]]
+      [[\n{\n${inputs}\n${outputs}\n${contains}\n${connections}\n}\n]]
     
-      Contains [k lb @other rb] = [[contains { ${other} }]]
-      Connections [k lb @connections rb] = [[connections { ${connections} }]]
+      Contains [k lb @other rb] = [[contains {${other} }\n]]
+      Connections [k lb @connections rb] = [[connections {\n${connections}\n}]]
 
       Initially [k lb @code rb] = [[initially { ${code} }]]
-      Handler [k lb @code rb] = [[handler { ${code} }]]
+      Handler [k lb code rb] = [[handler { ${code} }]]
 
         OtherComponent [ident inputs outputs] = [[${ident} ${inputs} ${outputs}]]
-        Connection [sender receiver] = [[${sender} ${receiver}]]
+        Connection [sender receiver] = [[${sender} ${receiver}\n]]
 
         Sender [rid] = [[${rid}]]
 	Receiver [rid] = [[${rid}]]
@@ -43,13 +43,13 @@ CaseCode [code] = [[${code}]]
 MessageSend [k rid e] = [[send ${rid} ${e}]]
 Expression [methodCall] = [[${methodCall}]]
 
-Inputs [k lb @rid rb] = [[inputs [ ${rid} ] ]]
-Outputs [k lb @rid rb] = [[outputs [ ${rid} ] ]]
-Objects [k lb @rid rb] = [[objects [ ${rid} ] ]]
+Inputs [k lb @rid rb] = [[inputs [ ${rid} \] ]]
+Outputs [k lb @rid rb] = [[outputs [ ${rid} \] ]]
+Objects [k lb @rid rb] = [[objects [ ${rid} \] ]]
 
 Object [fid k lb @methods rb] = [[${fid} methods [ ${methods} ] ]]
 
-Method [dot fid inparams outparams] = [[.${flatIdent} ${inparams} ${outparams}]]
+Method [dot fid inparams outparams] = [[.${fid} ${inparams} ${outparams}]]
 
 InputParameters [lt @params] = [[< ${params}]]
 OutputParameters [gt @params] = [[> ${params}]]

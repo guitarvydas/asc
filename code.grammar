@@ -5,7 +5,7 @@ Actual = flatIdent
 
 FlatCode = MethodCall | Abort
 Abort = "abort"
-HandlerCode = Case* Else?
+HandlerCode = Case* Else*
 
 Case = relativeIdent ":" CaseCode*
 Else = "_" ":" FlatCode*
