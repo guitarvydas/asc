@@ -1,0 +1,70 @@
+include(`asc.ohm')
+
+  Component [comp] = [[${comp}]]
+  Composite [konstant ident body] = [[composite ${ident} ${body}]]
+  Leaf [k ident body] = [[leaf ${ident} ${body}]]
+
+    LeafBody [lb inputs outputs object initially handler rb] =
+      [[ { ${inputs} ${outputs} ${objects} ${initially} ${handler} }\n]]
+
+    CompositeBody [lb inputs outputs contains connectios rb] =
+      [[ { ${inputs} ${outputs} ${contains} ${connections} }\n]]
+    
+      Contains [k lb @other rb] = [[contains { ${other} }]]
+      Connections [k lb @connections rb] = [[connections { ${connections} }]]
+
+      Initially [k lb @code rb] = [[initially { ${code} }]]
+      Handler [k lb @code rb] = [[handler { ${code} }]]
+
+        OtherComponent [ident inputs outputs] = [[${ident} ${inputs} ${outputs}]]
+        Connection [sender receiver] = [[${sender} ${receiver}]]
+
+        Sender [rid] = [[${rid}]]
+	Receiver [rid] = [[${rid}]]
+
+ relativeIdent [k fid @more] = [[./${fid}${more}]]
+ relativeIdentMore [k fid] = [[/${fid}]]
+    
+FlatCode [code] = [[${code}]]
+
+MethodCall [fid1 k fid2 @actuals] = [[${fid1}.${fid2}${actuals}]]
+
+Actuals [lp @actuals rp] = [[(${actuals})]]
+Actual [fid] = [[${fid}]]
+
+Abort [k] = [[abort]]
+HandlerCode [@cases @xelse] = [[${cases}${xelse}]]
+
+Case [rid k @code] = [[${rid} : ${code}]]
+Else [k1 k2 @code] = [[_ : ${code}]]
+
+CaseCode [code] = [[${code}]]
+
+MessageSend [k rid e] = [[send ${rid} ${e}]]
+Expression [methodCall] = [[${methodCall}]]
+
+Inputs [k lb @rid rb] = [[inputs [ ${rid} ] ]]
+Outputs [k lb @rid rb] = [[outputs [ ${rid} ] ]]
+Objects [k lb @rid rb] = [[objects [ ${rid} ] ]]
+
+Object [fid k lb @methods rb] = [[${fid} methods [ ${methods} ] ]]
+
+Method [dot fid inparams outparams] = [[.${flatIdent} ${inparams} ${outparams}]]
+
+InputParameters [lt @params] = [[< ${params}]]
+OutputParameters [gt @params] = [[> ${params}]]
+
+Parameters [lp @ids rp] = [[(${ids})]]
+
+
+flatIdent [first @rest] = [[${first}${rest}]]
+identFirst [c] = [[${c}]]
+identRest [c] = [[${c}]]
+
+keyword [k] = [[${k}]]
+bracket [c] = [[${c}]]
+misc [c] = [[${c}]]
+separator [sep] = [[${sep}]]
+whitespace [c] = [[${c}]]
+
+space [ws] = [[${ws}]]

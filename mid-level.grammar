@@ -1,0 +1,13 @@
+Inputs = "inputs" "[" relativeIdent* "]"
+Outputs = "outputs" "[" relativeIdent* "]"
+Objects = "objects" "[" Object* "]"
+
+Object = flatIdent "methods" "[" Method* "]"
+
+Method = "." flatIdent InputParameters OutputParameters
+
+InputParameters = "<" Parameters?
+OutputParameters = ">" Parameters?
+
+Parameters = "(" flatIdent? ")"
+

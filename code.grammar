@@ -1,0 +1,17 @@
+MethodCall = flatIdent "." flatIdent Actuals?
+
+Actuals = "(" Actual* ")"
+Actual = flatIdent
+
+FlatCode = MethodCall | Abort
+Abort = "abort"
+HandlerCode = Case* Else?
+
+Case = relativeIdent ":" CaseCode*
+Else = "_" ":" FlatCode*
+
+CaseCode =   MessageSend
+           | FlatCode
+
+MessageSend = "send" relativeIdent Expression
+Expression = MethodCall

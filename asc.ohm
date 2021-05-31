@@ -1,0 +1,70 @@
+ASC {
+  Component = Composite | Leaf
+  Composite = "composite" flatIdent CompositeBody
+  Leaf = "leaf" flatIdent LeafBody
+
+    LeafBody = "{" Inputs Outputs Objects Initially Handler "}"
+
+    CompositeBody = "{" Inputs Outputs Contains Connections "}"
+    
+      Contains = "contains" "{" OtherComponent* "}"
+      Connections = "connections" "{" Connection* "}"
+
+      Initially = "initially" "{" FlatCode* "}"
+      Handler = "handler" "{" HandlerCode "}"
+
+        OtherComponent = flatIdent Inputs Outputs
+        Connection = Sender Receiver
+
+        Sender = relativeIdent
+	Receiver = relativeIdent
+
+ relativeIdent = "./" flatIdent relativeIdentMore*
+ relativeIdentMore = "/" flatIdent
+    
+
+MethodCall = flatIdent "." flatIdent Actuals?
+
+Actuals = "(" Actual* ")"
+Actual = flatIdent
+
+FlatCode = MethodCall | Abort
+Abort = "abort"
+HandlerCode = Case* Else?
+
+Case = relativeIdent ":" CaseCode*
+Else = "_" ":" FlatCode*
+
+CaseCode =   MessageSend
+           | FlatCode
+
+MessageSend = "send" relativeIdent Expression
+Expression = MethodCall
+
+Inputs = "inputs" "[" relativeIdent* "]"
+Outputs = "outputs" "[" relativeIdent* "]"
+Objects = "objects" "[" Object* "]"
+
+Object = flatIdent "methods" "[" Method* "]"
+
+Method = "." flatIdent InputParameters OutputParameters
+
+InputParameters = "<" Parameters?
+OutputParameters = ">" Parameters?
+
+Parameters = "(" flatIdent? ")"
+
+
+flatIdent = ~keyword identFirst identRest*
+identFirst = "a" .. "z" | "A" .. "Z"
+identRest = ~separator any
+
+keyword = "inputs" | "outputs" | "contains" | "connections" | "send" | "abort"
+bracket = "(" | ")" | "<" | ">" | "[" | "]" | "."
+misc = "_" | ":"
+separator = misc | bracket | whitespace
+whitespace = " " | "\t" | "\n" | "," | ";"
+
+space := whitespace
+
+}

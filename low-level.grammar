@@ -1,0 +1,11 @@
+flatIdent = ~keyword identFirst identRest*
+identFirst = "a" .. "z" | "A" .. "Z"
+identRest = ~separator any
+
+keyword = "inputs" | "outputs" | "contains" | "connections" | "send" | "abort"
+bracket = "(" | ")" | "<" | ">" | "[" | "]" | "."
+misc = "_" | ":"
+separator = misc | bracket | whitespace
+whitespace = " " | "\t" | "\n" | "," | ";"
+
+space := whitespace

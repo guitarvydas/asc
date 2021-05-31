@@ -1,0 +1,26 @@
+ASC {
+  Component = Composite | Leaf
+  Composite = "composite" flatIdent CompositeBody
+  Leaf = "leaf" flatIdent LeafBody
+
+    LeafBody = "{" Inputs Outputs Objects Initially Handler "}"
+
+    CompositeBody = "{" Inputs Outputs Contains Connections "}"
+    
+      Contains = "contains" "{" OtherComponent* "}"
+      Connections = "connections" "{" Connection* "}"
+
+      Initially = "initially" "{" FlatCode* "}"
+      Handler = "handler" "{" HandlerCode "}"
+
+        OtherComponent = flatIdent Inputs Outputs
+        Connection = Sender Receiver
+
+        Sender = relativeIdent
+	Receiver = relativeIdent
+
+include(`ident.grammar')
+include(`code.grammar')
+include(`mid-level.grammar')
+include(`low-level.grammar')
+}
