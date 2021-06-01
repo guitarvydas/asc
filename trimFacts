@@ -1,0 +1,2 @@
+#!/bin/bash
+tr '\t' ' ' | sed -E -e 's/FACT +//g' | sed -E -e 's/^ +//g' | sed -E -e '/^$/d'

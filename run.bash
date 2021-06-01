@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 set -e
 trap 'catch' ERR
 
@@ -18,6 +19,6 @@ m4 asc.grasem >_.grasem
 ../grasem/run.bash _.grasem >_.js
 cat _.js foreign.js >_asc.js
 
-node _asc.js <${target1}.asc
-node _asc.js <${target2}.asc
-node _asc.js <${target3}.asc
+node _asc.js <${target1}.asc | ./trimFacts
+node _asc.js <${target2}.asc | ./trimFacts
+node _asc.js <${target3}.asc | ./trimFacts
