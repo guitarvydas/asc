@@ -79,9 +79,9 @@ Method [dot fid inports outports] =
   [[FACT method ${scopeGet ('object')} ${fid}\n${inports}${outports}]]
 
 InputPorts [lt @ports] = [[${ports}]]
-InputPort [id] = [[FACT inputPort ${scopeGet ('object')} ${id}\n]]
+InputPort [id] = [[FACT input ${scopeGet ('object')} ${id}\n]]
 OutputPorts [gt @ports] = [[${ports}]]
-OutputPort [id] = [[FACT outputPort ${scopeGet ('object')} ${id}\n]]
+OutputPort [id] = [[FACT output ${scopeGet ('object')} ${id}\n]]
 
 Port [lp @id rp] = [[(${id})]]
 
