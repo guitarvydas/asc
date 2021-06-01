@@ -1,14 +1,18 @@
 include(`asc.ohm')
 
   Component [comp] = [[${comp}]]
-  Composite [konstant ident body] = [[composite ${ident} ${body}]]
-  Leaf [k ident body] = [[leaf ${ident} ${body}]]
+  Composite [konstant ident body] =
+    {{ scopeAdd ('component', _ident._glue ()); }}
+    [[FACT composite ${scopeGet ('component')}\n${body}]]
+  Leaf [k ident body] =
+    {{ scopeAdd ('component', _ident._glue ()); }}
+    [[FACT leaf ${scopeGet ('component')}\n${body}]]
 
     LeafBody [lb inputs outputs objects initially handler rb] =
-      [[{\n${inputs}\n${outputs}\n${objects}\n${initially}\n${handler}\n}\n]]
+      [[${inputs}\n${outputs}\n${objects}\n${initially}\n${handler}\n]]
 
     CompositeBody [lb inputs outputs contains connections rb] =
-      [[\n{\n${inputs}\n${outputs}\n${contains}\n${connections}\n}\n]]
+      [[${inputs}\n${outputs}\n${contains}\n${connections}\n]]
     
       Contains [k lb @other rb] = [[contains {${other} }\n]]
       Connections [k lb @connections rb] = [[connections {\n${connections}\n}]]

@@ -7,7 +7,7 @@ catch () {
     exit 1
 }
 
-set -x
+echo '*** DECLARE ***'
 
 target1=layer0
 target2=container1
