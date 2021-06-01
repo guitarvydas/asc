@@ -22,7 +22,7 @@ include(`asc.ohm')
         Sender [rid] = [[${rid}]]
 	Receiver [rid] = [[${rid}]]
 
- relativeIdent [k fid @more] = [[__${fid}${more}]]
+ relativeIdent [k fid @more] = [[${k}${fid}${more}]]
  relativeIdentMore [k fid] = [[${k}${fid}]]
     
 FlatCode [code] = [[${code}]]
@@ -64,7 +64,9 @@ identRest [c] = [[${c}]]
 keyword [k] = [[${k}]]
 bracket [c] = [[${c}]]
 misc [c] = [[${c}]]
+dotslash [c] = [[__]]
 slash [c] = [[_]]
+dot [c] = [[_]]
 separator [sep] = [[${sep}]]
 whitespace [c] = [[${c}]]
 

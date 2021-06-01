@@ -3,10 +3,12 @@ identFirst = "a" .. "z" | "A" .. "Z"
 identRest = ~separator any
 
 keyword = "inputs" | "outputs" | "contains" | "connections" | "send" | "abort"
-bracket = "(" | ")" | "<" | ">" | "[" | "]" | "."
+bracket = "(" | ")" | "<" | ">" | "[" | "]"
 misc = "_" | ":"
 slash = "/"
-separator = misc | bracket | slash | whitespace
+dotslash = "./"
+dot = "."
+separator = misc | bracket | dotslash | dot | slash | whitespace
 whitespace = " " | "\t" | "\n" | "," | ";"
 
 space := whitespace
