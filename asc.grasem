@@ -3,14 +3,14 @@ include(`asc.ohm')
   Component [comp] = {{ scopeAdd ('counter', 0); }} [[${comp}]]
   Composite [konstant ident body] =
     {{
-       scopeAdd ('component', _ident._glue ()); 
+       scopeAdd ('component', '.'); 
     }}
-    [[FACT composite ${scopeGet ('component')}\n${body}]]
+    [[FACT composite ${scopeGet ('component')} nil\nFACT name . ${ident}\n${body}\n]]
   Leaf [k ident body] =
     {{
-       scopeAdd ('component', _ident._glue ()); 
+       scopeAdd ('component', '.'); 
     }}
-    [[FACT leaf ${scopeGet ('component')}\n${body}]]
+    [[FACT leaf ${scopeGet ('component')} nil\nFACT name . ${ident}\n${body}]]
 
     LeafBody [lb inputs outputs objects initially handler rb] =
       [[${inputs}\n${outputs}\n${objects}\n${initially}\n${handler}\n]]
@@ -25,14 +25,15 @@ include(`asc.ohm')
       Handler [k lb code rb] = [[]]
 
         OtherComponent [ident inputs outputs] =
-          {{ 
-            scopeAdd ('container', scopeGet ('component'));
-	    scopeAdd ('component', _ident._glue ());
+          {{
+	    let container = scopeGet ('component');
+	    scopeAdd ('container', container);
+	    scopeAdd ('component',  container + "/c/" + _ident._glue ());
 	  }}
 	  [[FACT contains ${scopeGet ('container')} ${ident}\n${inputs}${outputs}]]
 
         Connection [sender receiver] =
-	  {{ scopeAdd ('connection', gen ('conn_')); }}
+	  {{ scopeAdd ('connection', gen (scopeGet ('component') + "/x/")); }}
 	  [[
             FACT connection ${scopeGet ('component')} ${scopeGet ('connection')}
 	    FACT sender ${scopeGet ('connection')} ${sender}
@@ -73,7 +74,7 @@ Objects [k lb @obj rb] = [[${obj}]]
 
 Object [fid k lb @methods rb] =
   {{ scopeAdd ('object', _fid._glue ()); }}
-  [[FACT object ${scopeGet ('component')} ${fid}\n${methods}]]
+  [[FACT object ${scopeGet ('component')}/c/${fid}\n${methods}]]
 
 Method [dot fid inports outports] =
   [[FACT method ${scopeGet ('object')} ${fid}\n${inports}${outports}]]

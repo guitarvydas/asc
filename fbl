@@ -1,0 +1,4 @@
+#!/bin/bash
+sed -E -e 's/ /(/' \
+    | sed -E -e 's/$/)/' \
+    | sed -E -e 's/ /,/g'
