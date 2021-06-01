@@ -62,7 +62,8 @@ identRest = ~separator any
 keyword = "inputs" | "outputs" | "contains" | "connections" | "send" | "abort"
 bracket = "(" | ")" | "<" | ">" | "[" | "]" | "."
 misc = "_" | ":"
-separator = misc | bracket | whitespace
+slash = "/"
+separator = misc | bracket | slash | whitespace
 whitespace = " " | "\t" | "\n" | "," | ";"
 
 space := whitespace
