@@ -17,8 +17,8 @@ include(`asc.ohm')
       Contains [k lb @other rb] = [[contains {${other} }\n]]
       Connections [k lb @connections rb] = [[connections {\n${connections}\n}]]
 
-      Initially [k lb @code rb] = [[initially { ${code} }]]
-      Handler [k lb code rb] = [[handler { ${code} }]]
+      Initially [k lb @code rb] = [[]]
+      Handler [k lb code rb] = [[]]
 
         OtherComponent [ident inputs outputs] = [[${ident} ${inputs} ${outputs}]]
         Connection [sender receiver] = [[${sender} ${receiver}\n]]
@@ -26,8 +26,8 @@ include(`asc.ohm')
         Sender [rid] = [[${rid}]]
 	Receiver [rid] = [[${rid}]]
 
- relativeIdent [k fid @more] = [[${k}${fid}${more}]]
- relativeIdentMore [k fid] = [[${k}${fid}]]
+ override_relativeIdent [k fid @more] = [[${k}${fid}${more}]]
+ override_relativeIdentMore [k fid] = [[${k}${fid}]]
     
 FlatCode [code] = [[${code}]]
 
@@ -47,8 +47,12 @@ CaseCode [code] = [[${code}]]
 MessageSend [k rid e] = [[send ${rid} ${e}]]
 Expression [methodCall] = [[${methodCall}]]
 
-Inputs [k lb @rid rb] = [[inputs [ ${rid} \] ]]
-Outputs [k lb @rid rb] = [[outputs [ ${rid} \] ]]
+Inputs [k lb @rid rb] = [[${rid}]]
+InputIdent [id] = [[FACT input ${scopeGet ('component')} ${id}\n]]
+
+Outputs [k lb @rid rb] = [[${rid}]]
+OutputIdent [id] = [[FACT output ${scopeGet ('component')} ${id}\n]]
+
 Objects [k lb @rid rb] = [[objects [ ${rid} \] ]]
 
 Object [fid k lb @methods rb] = [[${fid} methods [ ${methods} ] ]]

@@ -16,8 +16,8 @@ ASC {
         OtherComponent = flatIdent Inputs Outputs
         Connection = Sender Receiver
 
-        Sender = relativeIdent
-	Receiver = relativeIdent
+        Sender = override_relativeIdent
+	Receiver = override_relativeIdent
 
 include(`ident.grammar')
 include(`code.grammar')

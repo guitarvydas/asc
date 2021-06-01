@@ -1,5 +1,5 @@
-Inputs = "inputs" "[" relativeIdent* "]"
-Outputs = "outputs" "[" relativeIdent* "]"
+Inputs = "inputs" "[" InputIdent* "]"
+Outputs = "outputs" "[" OutputIdent* "]"
 Objects = "objects" "[" Object* "]"
 
 Object = flatIdent "methods" "[" Method* "]"
@@ -11,3 +11,6 @@ OutputParameters = ">" Parameters?
 
 Parameters = "(" flatIdent? ")"
 
+
+InputIdent = override_relativeIdent
+OutputIdent = override_relativeIdent

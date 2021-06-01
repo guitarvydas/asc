@@ -16,11 +16,11 @@ ASC {
         OtherComponent = flatIdent Inputs Outputs
         Connection = Sender Receiver
 
-        Sender = relativeIdent
-	Receiver = relativeIdent
+        Sender = override_relativeIdent
+	Receiver = override_relativeIdent
 
- relativeIdent = dotslash flatIdent relativeIdentMore*
- relativeIdentMore = slash flatIdent
+ override_relativeIdent = dotslash flatIdent override_relativeIdentMore*
+ override_relativeIdentMore = slash flatIdent
     
 
 MethodCall = flatIdent "." flatIdent Actuals?
@@ -32,17 +32,17 @@ FlatCode = MethodCall | Abort
 Abort = "abort"
 HandlerCode = Case* Else*
 
-Case = relativeIdent ":" CaseCode*
+Case = override_relativeIdent ":" CaseCode*
 Else = "_" ":" FlatCode*
 
 CaseCode =   MessageSend
            | FlatCode
 
-MessageSend = "send" relativeIdent Expression
+MessageSend = "send" override_relativeIdent Expression
 Expression = MethodCall
 
-Inputs = "inputs" "[" relativeIdent* "]"
-Outputs = "outputs" "[" relativeIdent* "]"
+Inputs = "inputs" "[" InputIdent* "]"
+Outputs = "outputs" "[" OutputIdent* "]"
 Objects = "objects" "[" Object* "]"
 
 Object = flatIdent "methods" "[" Method* "]"
@@ -54,6 +54,9 @@ OutputParameters = ">" Parameters?
 
 Parameters = "(" flatIdent? ")"
 
+
+InputIdent = override_relativeIdent
+OutputIdent = override_relativeIdent
 
 flatIdent = ~keyword identFirst identRest*
 identFirst = "a" .. "z" | "A" .. "Z"

@@ -7,11 +7,11 @@ FlatCode = MethodCall | Abort
 Abort = "abort"
 HandlerCode = Case* Else*
 
-Case = relativeIdent ":" CaseCode*
+Case = override_relativeIdent ":" CaseCode*
 Else = "_" ":" FlatCode*
 
 CaseCode =   MessageSend
            | FlatCode
 
-MessageSend = "send" relativeIdent Expression
+MessageSend = "send" override_relativeIdent Expression
 Expression = MethodCall
