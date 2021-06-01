@@ -19,6 +19,7 @@ m4 asc.grasem >_.grasem
 ../grasem/run.bash _.grasem >_.js
 cat _.js foreign.js >_asc.js
 
-node _asc.js <${target1}.asc | ./trimFacts | ./fb2pl
+#node _asc.js <${target1}.asc | ./trimFacts | ./fb2pl
+node _asc.js <${target1}.asc | ./trimFacts
 #node _asc.js <${target2}.asc | ./trimFacts
 #node _asc.js <${target3}.asc | ./trimFacts

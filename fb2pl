@@ -1,2 +1,7 @@
 #!/bin/bash
-sed -E -e 's/ /(/' | sed -E -e 's/$/)./' | sed -E -e 's/ /,/g' | sort
+sed -E -e 's/\./x/g' \
+    | sed -E -e 's@/@y@g' \
+    | sed -E -e 's/ /(/' \
+    | sed -E -e 's/$/)./' \
+    | sed -E -e 's/ /,/g' \
+    | sort
