@@ -1,11 +1,15 @@
 include(`asc.ohm')
 
-  Component [comp] = [[${comp}]]
+  Component [comp] = {{ scopeAdd ('counter', 0); }} [[${comp}]]
   Composite [konstant ident body] =
-    {{ scopeAdd ('component', _ident._glue ()); }}
+    {{
+       scopeAdd ('component', _ident._glue ()); 
+    }}
     [[FACT composite ${scopeGet ('component')}\n${body}]]
   Leaf [k ident body] =
-    {{ scopeAdd ('component', _ident._glue ()); }}
+    {{
+       scopeAdd ('component', _ident._glue ()); 
+    }}
     [[FACT leaf ${scopeGet ('component')}\n${body}]]
 
     LeafBody [lb inputs outputs objects initially handler rb] =
@@ -14,15 +18,27 @@ include(`asc.ohm')
     CompositeBody [lb inputs outputs contains connections rb] =
       [[${inputs}\n${outputs}\n${contains}\n${connections}\n]]
     
-      Contains [k lb @other rb] = [[contains {${other} }\n]]
-      Connections [k lb @connections rb] = [[connections {\n${connections}\n}]]
+      Contains [k lb @other rb] = [[${other}]]
+      Connections [k lb @connections rb] = [[${connections}]]
 
       Initially [k lb @code rb] = [[]]
       Handler [k lb code rb] = [[]]
 
-        OtherComponent [ident inputs outputs] = [[${ident} ${inputs} ${outputs}]]
-        Connection [sender receiver] = [[${sender} ${receiver}\n]]
+        OtherComponent [ident inputs outputs] =
+          {{ 
+            scopeAdd ('container', scopeGet ('component'));
+	    scopeAdd ('component', _ident._glue ());
+	  }}
+	  [[FACT contains ${scopeGet ('container')} ${ident}\n${inputs}${outputs}]]
 
+        Connection [sender receiver] =
+	  {{ scopeAdd ('connection', gen ('conn_')); }}
+	  [[
+            FACT connection ${scopeGet ('component')} ${scopeGet ('connection')}
+	    FACT sender ${scopeGet ('connection')} ${sender}
+	    FACT receiver ${scopeGet ('connection')} ${receiver}
+          ]]
+	  
         Sender [rid] = [[${rid}]]
 	Receiver [rid] = [[${rid}]]
 
@@ -72,9 +88,9 @@ identRest [c] = [[${c}]]
 keyword [k] = [[${k}]]
 bracket [c] = [[${c}]]
 misc [c] = [[${c}]]
-dotslash [c] = [[__]]
-slash [c] = [[_]]
-dot [c] = [[_]]
+dotslash [c] = [[xx]]
+slash [c] = [[x]]
+dot [c] = [[x]]
 separator [sep] = [[${sep}]]
 whitespace [c] = [[${c}]]
 

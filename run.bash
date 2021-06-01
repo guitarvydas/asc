@@ -19,5 +19,5 @@ m4 asc.grasem >_.grasem
 cat _.js foreign.js >_asc.js
 
 node _asc.js <${target1}.asc
-node _asc.js <${target2}.asc
-node _asc.js <${target3}.asc
+#node _asc.js <${target2}.asc
+#node _asc.js <${target3}.asc
