@@ -69,16 +69,21 @@ InputIdent [id] = [[FACT input ${scopeGet ('component')} ${id}\n]]
 Outputs [k lb @rid rb] = [[${rid}]]
 OutputIdent [id] = [[FACT output ${scopeGet ('component')} ${id}\n]]
 
-Objects [k lb @rid rb] = [[objects [ ${rid} \] ]]
+Objects [k lb @obj rb] = [[${obj}]]
 
-Object [fid k lb @methods rb] = [[${fid} methods [ ${methods} ] ]]
+Object [fid k lb @methods rb] =
+  {{ scopeAdd ('object', _fid._glue ()); }}
+  [[FACT object ${scopeGet ('component')} ${fid}\n${methods}]]
 
-Method [dot fid inparams outparams] = [[.${fid} ${inparams} ${outparams}]]
+Method [dot fid inports outports] =
+  [[FACT method ${scopeGet ('object')} ${fid}\n${inports}${outports}]]
 
-InputParameters [lt @params] = [[< ${params}]]
-OutputParameters [gt @params] = [[> ${params}]]
+InputPorts [lt @ports] = [[${ports}]]
+InputPort [id] = [[FACT inputPort ${scopeGet ('object')} ${id}\n]]
+OutputPorts [gt @ports] = [[${ports}]]
+OutputPort [id] = [[FACT outputPort ${scopeGet ('object')} ${id}\n]]
 
-Parameters [lp @ids rp] = [[(${ids})]]
+Port [lp @id rp] = [[(${id})]]
 
 
 flatIdent [first @rest] = [[${first}${rest}]]

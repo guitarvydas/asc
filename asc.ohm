@@ -47,12 +47,14 @@ Objects = "objects" "[" Object* "]"
 
 Object = flatIdent "methods" "[" Method* "]"
 
-Method = dot flatIdent InputParameters OutputParameters
+Method = dot flatIdent InputPorts OutputPorts
 
-InputParameters = "<" Parameters?
-OutputParameters = ">" Parameters?
+InputPorts = "<" InputPort*
+InputPort = Port
+OutputPorts = ">" OutputPort*
+OutputPort = Port
 
-Parameters = "(" flatIdent? ")"
+Port = "(" flatIdent? ")"
 
 
 InputIdent = override_relativeIdent
