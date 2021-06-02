@@ -1,6 +1,6 @@
 function hello () {
     this.kind = "leaf";
-    this.initially = function () {];
+    this.initially = function () {};
     this.react = function (e) {
 	if (e.tag.portMatch ("./i/r")) {
 	    this.send ("./o/s", ohello.greet ());
@@ -30,7 +30,7 @@ var container1 = {
     outputs : [ "./o/y" ],
     contains : [ {name:  "./c/hello",
 		  kind: "foreign",
-		  invocation: "synchronous",
+		  flow: "sequential", // scheduling: "sequential"
 		  interface: {
 		      inputs: ["./c/hello/i/r"],
 		      outputs: ["./c/hello/o/s"]))],
@@ -62,8 +62,8 @@ function Runnable () {
 	}
     };
     this.ready = function () {return 0 < this.inputQueue.length;};
-function instantiate (component) {
-    var runnable = new Runnable ();
+// function instantiate (component) {
+//     var runnable = new Runnable ();
     
-    component.forEach
-}
+//     component.forEach
+// }

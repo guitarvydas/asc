@@ -1,0 +1,23 @@
+side effect add (Runnable) {
+  all.put (Runnable)
+}
+
+calculator instantiate (Template) >> Runnable {
+  choice Template {
+  
+    | Composite Template {
+      i = type {Composite Instance + Template}
+      i.contains = collect for all child template in Template/contains {
+                       instantiate (child template)
+		   }
+      i
+    }
+
+    | Leaf Instance {
+      type {Leaf Instance + Template}
+    }
+
+    |* {
+      panic
+    }
+}
